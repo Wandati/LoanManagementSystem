@@ -15,6 +15,6 @@ server:
 credable:
   scoring:
     base-url: https://scoringtest.credable.io/api/v1
-    client-token: <your-token> # Replace with actual token
+    client-token: mock-token  # Using mock due to server timeout
     retries: 5
     retry-delay: 2000

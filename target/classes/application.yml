@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: lms
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/lms_db
+    username: postgres
+    password: 12345
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+server:
+  port: 8080
+credable:
+  scoring:
+    base-url: https://scoringtest.credable.io/api/v1
+    client-token: mock-token  # Using mock due to server timeout
+    retries: 5
+    retry-delay: 2000
