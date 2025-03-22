@@ -1,0 +1,8 @@
+com/credable/lms/repository/LoanRequestRepository.class
+com/credable/lms/entity/LoanRequest.class
+com/credable/lms/controller/MobileAppController.class
+com/credable/lms/entity/Customer.class
+com/credable/lms/repository/CustomerRepository.class
+com/credable/lms/App.class
+com/credable/lms/service/LoanService.class
+com/credable/lms/LmsApplication.class
