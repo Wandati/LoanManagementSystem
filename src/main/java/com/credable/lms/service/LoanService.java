@@ -1,6 +1,7 @@
 package com.credable.lms.service;
 
 import com.credable.lms.entity.LoanRequest;
+import com.credable.lms.repository.CustomerRepository;
 import com.credable.lms.repository.LoanRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,12 +15,20 @@ public class LoanService {
     private LoanRequestRepository loanRequestRepository;
 
     @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
     private ScoringRestClient scoringRestClient;
 
     @Value("${credable.scoring.retries:5}")
     private int maxRetries;
 
     public LoanRequest requestLoan(String customerNumber, Double amount) {
+        // Check if customer is subscribed
+        if (!customerRepository.existsById(customerNumber)) {
+            throw new IllegalStateException("Customer must be subscribed first.");
+        }
+        // Check for ongoing loan request
         if (loanRequestRepository.findByCustomerNumberAndStatus(customerNumber, "PENDING").isPresent()) {
             throw new IllegalStateException("Ongoing loan request exists.");
         }
@@ -33,7 +42,7 @@ public class LoanService {
         // Initiate scoring
         String token = scoringRestClient.initiateQueryScore(customerNumber);
         loan.setScoringToken(token);
-        processScore(loan); // Handle scoring synchronously for simplicity
+        processScore(loan);
         return loanRequestRepository.save(loan);
     }
 
@@ -42,9 +51,8 @@ public class LoanService {
         String response = scoringRestClient.queryScore(loan.getScoringToken());
         loan.setRetryCount(loan.getRetryCount() + 1);
 
-        // Simplified: Assume any response means APPROVED
-        if (response != null && !response.isEmpty()) {
-            loan.setStatus("APPROVED");
+        if (response != null && response.contains("score")) {
+            loan.setStatus("APPROVED"); // Mock assumes approval; real logic would check score
         } else if (loan.getRetryCount() >= maxRetries) {
             loan.setStatus("FAILED");
         }
