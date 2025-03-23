@@ -1,9 +1,0 @@
-/home/ubuntu/lms/src/main/java/com/credable/lms/entity/Customer.java
-/home/ubuntu/lms/src/main/java/com/credable/lms/service/ScoringRestClient.java
-/home/ubuntu/lms/src/main/java/com/credable/lms/App.java
-/home/ubuntu/lms/src/main/java/com/credable/lms/LmsApplication.java
-/home/ubuntu/lms/src/main/java/com/credable/lms/service/LoanService.java
-/home/ubuntu/lms/src/main/java/com/credable/lms/repository/CustomerRepository.java
-/home/ubuntu/lms/src/main/java/com/credable/lms/controller/MobileAppController.java
-/home/ubuntu/lms/src/main/java/com/credable/lms/entity/LoanRequest.java
-/home/ubuntu/lms/src/main/java/com/credable/lms/repository/LoanRequestRepository.java
