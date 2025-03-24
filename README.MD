@@ -76,7 +76,6 @@ mvn spring-boot:run
 ### Docker Deployment
 #### 1. Update `docker-compose.yml`
 ```yaml
-version: '3.8'
 services:
   lms-app:
     build:
